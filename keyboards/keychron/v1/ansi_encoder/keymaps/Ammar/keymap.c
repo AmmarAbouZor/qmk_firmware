@@ -172,12 +172,14 @@ enum combos {
     KL_TAB,
     MCom_BSC,
     ComDot_DEL,
+    CV_GERMAN,
 };
 const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {LCTL_T(KC_J), LSFT_T(KC_K), COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
 const uint16_t PROGMEM mcom_combo[] = {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
@@ -185,4 +187,5 @@ combo_t key_combos[] = {
     [KL_TAB]   = COMBO(kl_combo, KC_TAB),
     [MCom_BSC]   = COMBO(mcom_combo, KC_BSPC),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
+    [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
