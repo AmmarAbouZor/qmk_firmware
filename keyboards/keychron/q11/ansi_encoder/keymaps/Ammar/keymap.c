@@ -99,6 +99,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LT(NAV,KC_SPC):
         case LT(SYMBOL,KC_BSPC):
             return TAPPING_TERM - 30;
+        case LALT_T(KC_A):
+        case LALT_T(KC_SCLN):
+            return TAPPING_TERM + 40;
         default:
             return TAPPING_TERM;
     }

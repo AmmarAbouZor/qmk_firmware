@@ -24,7 +24,7 @@
 
 // ****** My Configs ***********
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 #define TAPPING_TERM_PER_KEY
 
 // Quick Tab will deaktivated for Caps-Lock and Spacebar and Enter
