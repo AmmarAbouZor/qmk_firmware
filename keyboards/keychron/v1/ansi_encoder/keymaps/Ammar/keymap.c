@@ -87,16 +87,17 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        // Index and Middle Finger must move faster
-        // I added the space bar as test here.
-        case LSFT_T(KC_D):
-        case LCTL_T(KC_D):
-        case LSFT_T(KC_F):
-        case LCTL_T(KC_F):
-        case LSFT_T(KC_J):
-        case LCTL_T(KC_J):
-        case LSFT_T(KC_K):
-        case LCTL_T(KC_K):
+        // QUICK_TAP_TERM can't be more than tapping term, which affect vim movement
+        // If this is ever solved I work better with less TAPPING_TERM with my index and middle fingers
+        //
+        // case LSFT_T(KC_D):
+        // case LCTL_T(KC_D):
+        // case LSFT_T(KC_F):
+        // case LCTL_T(KC_F):
+        // case LSFT_T(KC_J):
+        // case LCTL_T(KC_J):
+        // case LSFT_T(KC_K):
+        // case LCTL_T(KC_K):
         case LT(SYMBOL,KC_SPC):
             return TAPPING_TERM - 30;
         case LALT_T(KC_A):
