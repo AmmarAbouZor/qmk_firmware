@@ -152,6 +152,19 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// Retro tapping for left gui and left shift home row
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case GUI_T(KC_S):
+        case LGUI_T(KC_L):
+        case LALT_T(KC_A):
+        case LALT_T(KC_SCLN):
+            return true;
+        default:
+            return false;
+    }
+}
+
 // Combos
 enum combos {
     DF_ESC,
