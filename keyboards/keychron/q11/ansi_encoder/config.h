@@ -21,3 +21,17 @@
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 23
+
+// ****** My Configs ***********
+
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
+
+// Quick Tab will deaktivated for Caps-Lock and Spacebar and Enter
+#define QUICK_TAP_TERM 200
+#define QUICK_TAP_TERM_PER_KEY
+
+// Permissive Hold for index and middle finger in homerow
+#define PERMISSIVE_HOLD_PER_KEY
+
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
