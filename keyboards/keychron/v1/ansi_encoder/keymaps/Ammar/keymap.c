@@ -152,20 +152,20 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 enum combos {
     DF_ESC,
     JK_ENTER,
-    // KL_TAB,
+    KL_TAB,
     MCom_BSC,
     ComDot_DEL,
 };
 const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {LCTL_T(KC_J), LSFT_T(KC_K), COMBO_END};
-// const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
 const uint16_t PROGMEM mcom_combo[] = {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
     [JK_ENTER]   = COMBO(jk_combo, KC_ENT),
-    // [KL_TAB]   = COMBO(kl_combo, KC_TAB),
+    [KL_TAB]   = COMBO(kl_combo, KC_TAB),
     [MCom_BSC]   = COMBO(mcom_combo, KC_BSPC),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
 };

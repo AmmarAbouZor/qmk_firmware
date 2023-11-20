@@ -36,7 +36,7 @@
 #define TAPPING_TERM_PER_KEY
 
 // Quick Tab will deaktivated for Caps-Lock and Spacebar and Enter
-#define QUICK_TAP_TERM 170
+#define QUICK_TAP_TERM 200
 #define QUICK_TAP_TERM_PER_KEY
 
 // Permissive Hold for index and middle finger in homerow
