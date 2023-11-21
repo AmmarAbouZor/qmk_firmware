@@ -20,9 +20,4 @@
 #define HAL_USE_SERIAL TRUE
 #define HAL_USE_ADC TRUE
 
-// This is taken from the playground branch. Check if this solves to probelm in windows
-/* #ifdef ENCODER_ENABLE */
-/* #  define PAL_USE_CALLBACKS TRUE */
-/* #endif */
-
 #include_next <halconf.h>

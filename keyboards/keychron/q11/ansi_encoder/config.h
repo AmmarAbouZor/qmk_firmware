@@ -24,6 +24,9 @@
 
 // ****** My Configs ***********
 
+// This fixes the problem with wake up after restart on windows
+#define SPLIT_WATCHDOG_ENABLE
+
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 
