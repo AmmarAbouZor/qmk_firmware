@@ -146,17 +146,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Deactivate quick tap for Caps-Lock and enter
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LT(NUMS,KC_BSPC):
-        case LT(NUMS,KC_ENT):
-           return 0;
-        default:
-            return QUICK_TAP_TERM;
-    }
-}
-
 // Retro tapping for left gui and left shift home row
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
