@@ -28,6 +28,16 @@ enum layers{
     NAV
 };
 
+enum custom_keycodes {
+    DE_SFU = SAFE_RANGE,
+    DE_U,
+    DE_SFA,
+    DE_A,
+    DE_SFO,
+    DE_O,
+    DE_S
+};
+
 #define KC_TASK LGUI(KC_TAB)
 #define KC_FLXP LGUI(KC_E)
 
@@ -43,8 +53,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [FN] = LAYOUT_91_ansi(
         RGB_TOG,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  RGB_TOG,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
-        _______,  RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,   _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
-        _______,  _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,   _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
+        _______,  RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,   _______,   DE_SFU,   DE_SFA,   DE_SFO,  _______,  _______,    _______,  _______,            _______,
+        _______,  _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,   _______,     DE_U,     DE_A,     DE_O,     DE_S,  _______,              _______,            _______,
         _______,  _______,            _______,  _______,  _______,  _______,   _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,  _______,  _______,            _______,                       _______,            _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -96,7 +106,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // case LCTL_T(KC_F):
         // case LCTL_T(KC_J):
         // case LSFT_T(KC_K):
-        //     return TAPPING_TERM - 10;
+        //     return TAPPING_TERM - 30;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 40;
@@ -163,7 +173,7 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Combos
+// *** Combos ***
 enum combos {
     DF_ESC,
     JK_ENTER,
@@ -186,4 +196,58 @@ combo_t key_combos[] = {
     [MCom_BSC]   = COMBO(mcom_combo, KC_BSPC),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
+};
+
+// *** macros ***
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case DE_SFU:
+        if (record->event.pressed) {
+            // when keycode DE_SFU is pressed
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P4)SS_UP(X_LALT));
+        } else {
+            // when keycode DE_SFU is released
+        }
+        break;
+
+    case DE_U:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P2)SS_TAP(X_P9)SS_UP(X_LALT));
+        }
+        break;
+
+    case DE_SFA:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P4)SS_TAP(X_P2)SS_UP(X_LALT));
+        }
+        break;
+
+    case DE_A:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P3)SS_TAP(X_P2)SS_UP(X_LALT));
+        }
+        break;
+
+
+    case DE_SFO:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P3)SS_UP(X_LALT));
+        }
+        break;
+
+    case DE_O:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P4)SS_TAP(X_P8)SS_UP(X_LALT));
+        }
+        break;
+
+
+    case DE_S:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P2)SS_TAP(X_P2)SS_TAP(X_P5)SS_UP(X_LALT));
+        }
+        break;
+    }
+
+    return true;
 };
