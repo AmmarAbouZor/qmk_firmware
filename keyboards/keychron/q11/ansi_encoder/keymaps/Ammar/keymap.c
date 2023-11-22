@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  RGB_TOG,
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  _______,  _______,     KC_7,     KC_8,    KC_9,  _______,   _______,  KC_HOME,  KC_END,  _______,  _______,  _______,    _______,  _______,            _______,
-        _______,  _______,  LALT_T(KC_0),  LGUI_T(KC_4),  LSFT_T(KC_5),  LCTL(KC_6),  _______,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_END,  _______,              _______,            _______,
+        _______,  _______,  LALT_T(KC_0),  LGUI_T(KC_4),  LSFT_T(KC_5),  LCTL_T(KC_6),  _______,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_END,  _______,              _______,            _______,
         _______,  _______,            _______,     KC_1,    KC_2,     KC_3,   _______,  _______,  KC_PGDN,  KC_PGUP,  _______,   _______,             _______,  _______,
         _______,  _______,  _______,  _______,  _______,            _______,                       _______,            _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -89,18 +89,14 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        // QUICK_TAP_TERM can't be more than tapping term, which affect vim movement
+        // QUICK_TAP_TERM can't be greater than tapping term, which affect vim movement
         // If this is ever solved I work better with less TAPPING_TERM with my index and middle fingers
         //
         // case LSFT_T(KC_D):
-        // case LCTL_T(KC_D):
-        // case LSFT_T(KC_F):
         // case LCTL_T(KC_F):
-        // case LSFT_T(KC_J):
         // case LCTL_T(KC_J):
         // case LSFT_T(KC_K):
-        // case LCTL_T(KC_K):
-            // return TAPPING_TERM - 30;
+        //     return TAPPING_TERM - 10;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 40;
@@ -174,12 +170,14 @@ enum combos {
     KL_TAB,
     MCom_BSC,
     ComDot_DEL,
+    CV_GERMAN,
 };
 const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {LCTL_T(KC_J), LSFT_T(KC_K), COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
 const uint16_t PROGMEM mcom_combo[] = {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
@@ -187,4 +185,5 @@ combo_t key_combos[] = {
     [KL_TAB]   = COMBO(kl_combo, KC_TAB),
     [MCom_BSC]   = COMBO(mcom_combo, KC_BSPC),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
+    [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
