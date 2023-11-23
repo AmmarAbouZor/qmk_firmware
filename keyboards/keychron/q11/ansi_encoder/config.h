@@ -31,6 +31,7 @@
 #define TAPPING_TERM_PER_KEY
 
 #define QUICK_TAP_TERM 200
+#define QUICK_TAP_TERM_PER_KEY
 
 // Permissive Hold for index and middle finger in homerow
 #define PERMISSIVE_HOLD_PER_KEY
