@@ -61,8 +61,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMB_NAV] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            _______,
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
-        KC_CAPS,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,    _______,  _______,            _______,
-        KC_LCTL, KC_EXCLAIM, KC_UNDS, KC_MINS,   KC_EQL,  KC_PLUS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,              _______,            _______,
+        KC_CAPS,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  _______,   _______,  _______,            _______,
+        KC_LCTL, KC_EXCLAIM, KC_UNDS, KC_MINS,   KC_EQL,  KC_PLUS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,              KC_APP,            _______,
         _______,            _______,  _______,  KC_GRV,  KC_LCBR,  KC_RCBR,  KC_LBRC,  KC_RBRC,    KC_LT,    KC_GT,   KC_BSLS,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -117,13 +117,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LSFT_T(KC_D):
-        case LCTL_T(KC_D):
-        case LSFT_T(KC_F):
         case LCTL_T(KC_F):
-        case LSFT_T(KC_J):
         case LCTL_T(KC_J):
         case LSFT_T(KC_K):
-        case LCTL_T(KC_K):
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
