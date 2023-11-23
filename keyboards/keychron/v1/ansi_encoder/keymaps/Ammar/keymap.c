@@ -102,7 +102,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LCTL_T(KC_J):
         case LSFT_T(KC_K):
         case LT(SYMB_NAV,KC_SPC):
-            return TAPPING_TERM - 30;
+            return TAPPING_TERM - 10;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 40;
@@ -150,6 +150,7 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
         case LGUI_T(KC_L):
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
+        case LT(SYMB_NAV,KC_SPC):
             return true;
         default:
             return false;
