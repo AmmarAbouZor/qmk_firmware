@@ -33,7 +33,9 @@ enum custom_keycodes {
     DE_A,
     DE_SFO,
     DE_O,
-    DE_S
+    DE_S,
+    WIN_DESK_PREV,
+    WIN_DESK_NEXT,
 };
 
 #define KC_TASK LGUI(KC_TAB)
@@ -77,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [SYMB_NAV] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [SYMB_NAV] = { ENCODER_CCW_CW(WIN_DESK_PREV, WIN_DESK_NEXT)},
     [NUMS]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
 #endif // ENCODER_MAP_ENABLE
@@ -230,6 +232,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DE_S:
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P2)SS_TAP(X_P2)SS_TAP(X_P5)SS_UP(X_LALT));
+        }
+        break;
+
+    case WIN_DESK_PREV:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LGUI)SS_TAP(X_LEFT)SS_UP(X_LCTL)SS_UP(X_LGUI));
+        }
+        break;
+
+    case WIN_DESK_NEXT:
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LGUI)SS_TAP(X_RGHT)SS_UP(X_LCTL)SS_UP(X_LGUI));
         }
         break;
     }
