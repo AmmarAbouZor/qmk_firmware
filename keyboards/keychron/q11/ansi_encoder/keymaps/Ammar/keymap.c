@@ -99,12 +99,13 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LSFT_T(KC_D):
         case LCTL_T(KC_F):
         case LCTL_T(KC_J):
-        case LSFT_T(KC_K):
         case LT(SYMB_NAV,KC_SPC):
             return TAPPING_TERM - 10;
+        case LSFT_T(KC_D):
+        case LSFT_T(KC_K):
+            return TAPPING_TERM - 30;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 40;
@@ -142,7 +143,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Disable quick term for backspace on the spacebar
+// Disable quick term for backspace
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(SYMB_NAV,KC_BSPC):
