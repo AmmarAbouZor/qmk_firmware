@@ -199,7 +199,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DE_SFU:
         if (record->event.pressed) {
             // when keycode DE_SFU is pressed
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P4)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00dc"SS_TAP(X_SPC));
         } else {
             // when keycode DE_SFU is released
         }
@@ -207,39 +207,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case DE_U:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P2)SS_TAP(X_P9)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00fc"SS_TAP(X_SPC));
         }
         break;
 
     case DE_SFA:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P4)SS_TAP(X_P2)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00c4"SS_TAP(X_SPC));
         }
         break;
 
     case DE_A:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P3)SS_TAP(X_P2)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00e4"SS_TAP(X_SPC));
         }
         break;
 
-
     case DE_SFO:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P5)SS_TAP(X_P3)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00d6"SS_TAP(X_SPC));
         }
         break;
 
     case DE_O:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P1)SS_TAP(X_P4)SS_TAP(X_P8)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00f6"SS_TAP(X_SPC));
         }
         break;
 
-
     case DE_S:
         if (record->event.pressed) {
-            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_P2)SS_TAP(X_P2)SS_TAP(X_P5)SS_UP(X_LALT));
+            SEND_STRING(SS_LCTL(SS_LSFT("u"))"00df"SS_TAP(X_SPC));
         }
         break;
     }
