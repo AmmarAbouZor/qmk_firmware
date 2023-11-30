@@ -105,7 +105,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 10;
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
-            return TAPPING_TERM - 30;
+            return TAPPING_TERM - 40;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 40;
@@ -117,10 +117,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 // Permissive Hold for index and middle finger in homerow
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LSFT_T(KC_D):
+        // case LSFT_T(KC_D):
+        // case LSFT_T(KC_K):
         case LCTL_T(KC_F):
         case LCTL_T(KC_J):
-        case LSFT_T(KC_K):
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
@@ -148,6 +148,10 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
         case LT(SYMB_NAV,KC_BSPC):
         case LT(NUMS,KC_BSPC):
         case LT(SYMB_NAV,KC_SPC):
+        case LSFT_T(KC_D):
+        case LSFT_T(KC_K):
+        case LCTL_T(KC_F):
+        case LCTL_T(KC_J):
             return 0;
         default:
             return QUICK_TAP_TERM;
