@@ -99,12 +99,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LCTL_T(KC_F):
-        case LCTL_T(KC_J):
         case LT(SYMB_NAV,KC_SPC):
-            return TAPPING_TERM - 10;
+            return TAPPING_TERM - 20;
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
+        case LCTL_T(KC_F):
+        case LCTL_T(KC_J):
             return TAPPING_TERM - 40;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
@@ -114,20 +114,20 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Permissive Hold for index and middle finger in homerow
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // case LSFT_T(KC_D):
-        // case LSFT_T(KC_K):
-        case LCTL_T(KC_F):
-        case LCTL_T(KC_J):
-            // Immediately select the hold action when another key is tapped.
-            return true;
-        default:
-            // Do not select the hold action when another key is tapped.
-            return false;
-    }
-}
+// // Permissive Hold for index and middle finger in homerow
+// bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         // case LSFT_T(KC_D):
+//         // case LSFT_T(KC_K):
+//         case LCTL_T(KC_F):
+//         case LCTL_T(KC_J):
+//             // Immediately select the hold action when another key is tapped.
+//             return true;
+//         default:
+//             // Do not select the hold action when another key is tapped.
+//             return false;
+//     }
+// }
 
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {

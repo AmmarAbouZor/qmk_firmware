@@ -40,7 +40,7 @@
 #define QUICK_TAP_TERM_PER_KEY
 
 // Permissive Hold for index and middle finger in homerow
-#define PERMISSIVE_HOLD_PER_KEY
+// #define PERMISSIVE_HOLD_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Retro tapping for left gui and left shift home row
