@@ -44,9 +44,9 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_DEL,             KC_MUTE,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BSPC,   KC_BSPC,   KC_BSPC,            KC_PGUP,
-        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_ENT,     KC_ENT,  KC_BSLS,            KC_PGDN,
-        LT(NUMS,KC_BSPC), LALT_T(KC_A), LGUI_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), KC_G, KC_H, LCTL_T(KC_J), LSFT_T(KC_K), LGUI_T(KC_L), LALT_T(KC_SCLN),  KC_QUOT, LT(NUMS,KC_ENT),  KC_HOME,
+        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,   KC_EQL,   KC_BSPC,            KC_PGUP,
+        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_QUOT,   KC_RCBR,  KC_BSLS,            KC_PGDN,
+        LT(NUMS,KC_ESC), LALT_T(KC_A), LGUI_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), KC_G, KC_H, LCTL_T(KC_J), LSFT_T(KC_K), LGUI_T(KC_L), LALT_T(KC_SCLN),  KC_BSPC, LT(NUMS,KC_ENT),  KC_HOME,
         OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
         KC_LCTL,  KC_LCMD,  KC_LALT,                     LT(SYMB_NAV,KC_SPC),                             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
@@ -132,7 +132,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(NUMS,KC_BSPC):
+        case LT(NUMS,KC_ESC):
         case LT(NUMS,KC_ENT):
             // Immediately select the hold action when another key is pressed.
             return true;
@@ -146,7 +146,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(SYMB_NAV,KC_BSPC):
-        case LT(NUMS,KC_BSPC):
+        case LT(NUMS,KC_ESC):
         case LT(SYMB_NAV,KC_SPC):
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
@@ -176,24 +176,21 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 // *** Combos ***
 enum combos {
     DF_ESC,
-    JK_ENTER,
-    KL_TAB,
-    MCom_BSC,
+    KL_ENTER,
+    SD_TAB,
     ComDot_DEL,
     CV_GERMAN,
 };
 const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {LCTL_T(KC_J), LSFT_T(KC_K), COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
-const uint16_t PROGMEM mcom_combo[] = {KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {LGUI_T(KC_S), LSFT_T(KC_D), COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
-    [JK_ENTER]   = COMBO(jk_combo, KC_ENT),
-    [KL_TAB]   = COMBO(kl_combo, KC_TAB),
-    [MCom_BSC]   = COMBO(mcom_combo, KC_BSPC),
+    [KL_ENTER]   = COMBO(kl_combo, KC_ENT),
+    [SD_TAB]   = COMBO(sd_combo, KC_TAB),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
