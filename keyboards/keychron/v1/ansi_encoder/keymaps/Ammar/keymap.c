@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN, KC_LCBR,    KC_RCBR,  _______,            _______,
         KC_LCTL, KC_EXCLAIM, KC_UNDS, KC_MINS,   KC_EQL,  KC_PLUS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,              KC_APP,            _______,
-        _______,            _______,   KC_GRV,  KC_LSFT,  KC_LCTL,   CW_TOGG,  KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,   KC_BSLS,              KC_CAPS,  _______,
+        _______,            _______,   KC_GRV,  KC_BSPC,  KC_BSPC,   CW_TOGG,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
     [NUMS] = LAYOUT_ansi_82(
@@ -108,7 +108,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 50;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
-            return TAPPING_TERM + 40;
+            return TAPPING_TERM + 10;
         default:
             return TAPPING_TERM;
     }
@@ -142,7 +142,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Disable quick term for backspace and spacebar
+// Disable quick term for backspace, spacebar, Control and Shift
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(SYMB_NAV,KC_BSPC):
