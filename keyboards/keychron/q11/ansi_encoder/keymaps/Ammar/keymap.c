@@ -100,12 +100,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(SYMB_NAV,KC_SPC):
-            return TAPPING_TERM - 20;
+            return TAPPING_TERM - 40;
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
         case LCTL_T(KC_F):
         case LCTL_T(KC_J):
-            return TAPPING_TERM - 50;
+            return TAPPING_TERM - 70;
         case LALT_T(KC_A):
         case LALT_T(KC_SCLN):
             return TAPPING_TERM + 10;
@@ -171,6 +171,17 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
 }
+
+
+// *** Keys overrides
+const key_override_t backspace_space_override = ko_make_basic(MOD_MASK_SHIFT, LT(SYMB_NAV,KC_SPC), KC_BSPC);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &backspace_space_override,
+    NULL // Null terminate the array of overrides!
+};
+
 
 // *** Combos ***
 enum combos {
