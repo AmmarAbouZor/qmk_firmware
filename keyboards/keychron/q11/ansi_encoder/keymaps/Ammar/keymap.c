@@ -46,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,  KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_INS,   KC_DEL,   KC_MUTE,
         _______,  KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,     KC_EQL,   KC_BSPC,            KC_PGUP,
         _______,  KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,  KC_BSLS,            KC_PGDN,
-        _______,  LT(NUMS,KC_ESC), LGUI_T(KC_A), LCTL_T(KC_S), LSFT_T(KC_D), LT(SYMB_NAV,KC_F), MT(MOD_LALT | MOD_LSFT, KC_G), KC_H, LT(SYMB_NAV,KC_J), LSFT_T(KC_K), LCTL_T(KC_L), LGUI_T(KC_SCLN),  KC_QUOT, LT(NUMS,KC_ENT), KC_HOME,
-        _______,  OSM(MOD_LSFT),   LALT_T(KC_Z),     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
-        _______,  KC_LCTL,  KC_LWIN,  KC_LALT,  KC_LALT,           KC_SPC,              KC_BSPC,   KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        _______,  LT(NUMS,KC_ESC), LALT_T(KC_A), LGUI_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), MT(MOD_LALT | MOD_LSFT, KC_G), KC_H, LCTL_T(KC_J), LSFT_T(KC_K), LGUI_T(KC_L), LALT_T(KC_SCLN),  KC_QUOT, LT(NUMS,KC_ENT), KC_HOME,
+        _______,  OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
+        _______,  KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),    LT(SYMB_NAV,KC_SPC),                   LT(SYMB_NAV,KC_BSPC),   KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_91_ansi(
         RGB_TOG,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  RGB_TOG,
@@ -62,15 +62,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  RGB_TOG,
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  KC_LCBR,    KC_RCBR,  _______,            _______,
-        _______,  KC_LCTL, KC_EXCLAIM, LCTL_T(KC_MINS), LSFT_T(KC_PLUS),   KC_EQL,  KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,               KC_APP,            _______,
-        _______,  _______,            _______,   KC_GRV,  KC_GRV,  KC_BSPC,   CW_TOGG,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
+        _______,  KC_LCTL, KC_EXCLAIM, KC_MINS, KC_PLUS,   KC_EQL,  KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,               KC_APP,            _______,
+        _______,  _______,            _______,   KC_GRV,  KC_LSFT,  KC_LCTL,   CW_TOGG,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,  _______,  _______,            _______,                       _______,            _______,  _______,    _______,  _______,  _______,  _______),
 
     [NUMS] = LAYOUT_91_ansi(
         RGB_TOG,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  RGB_TOG,
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  _______,  _______,  _______,  KC_PGUP,  _______,  _______,  _______,       KC_7,    KC_8,      KC_9,  _______,  _______,    _______,  _______,            _______,
-        _______,  _______,  _______,  LCTL_T(KC_HOME),  KC_PGDN, KC_END, _______,  KC_BSPC,  KC_4,    KC_5,      KC_6,  _______,  _______,              _______,            _______,
+        _______,  _______,  _______,  KC_HOME,  KC_PGDN, LCTL_T(KC_END), _______,  KC_BSPC,  KC_4,    KC_5,      KC_6,  _______,  _______,              _______,            _______,
         _______,  _______,            _______,  _______,  _______,  _______,  _______,  _______,      KC_1,      KC_2,     KC_3,  _______,             _______,  _______,
         _______,  _______,  _______,  _______,  _______,            _______,                         KC_0,            _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -99,19 +99,17 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case LT(SYMB_NAV,KC_SPC):
+            return TAPPING_TERM - 40;
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
             return TAPPING_TERM - 68;
-        case LT(SYMB_NAV,KC_F):
-        case LT(SYMB_NAV,KC_J):
-            return TAPPING_TERM - 60;
-        case LCTL_T(KC_S):
-        case LCTL_T(KC_L):
+        case LCTL_T(KC_F):
+        case LCTL_T(KC_J):
             return TAPPING_TERM - 55;
-        case LGUI_T(KC_A):
-        case LGUI_T(KC_SCLN):
-        case LALT_T(KC_Z):
-            return TAPPING_TERM + 30;
+        case LALT_T(KC_A):
+        case LALT_T(KC_SCLN):
+            return TAPPING_TERM + 40;
         default:
             return TAPPING_TERM;
     }
@@ -137,6 +135,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(NUMS,KC_ESC):
         case LT(NUMS,KC_ENT):
+        case LT(SYMB_NAV,KC_BSPC):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
@@ -145,16 +144,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Disable quick term for Esc, Control, Shift and symbol_layer in homerow
+// Disable quick term for backspace
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case LT(SYMB_NAV,KC_BSPC):
         case LT(NUMS,KC_ESC):
         case LSFT_T(KC_D):
         case LSFT_T(KC_K):
-        case LT(SYMB_NAV,KC_F):
-        case LT(SYMB_NAV,KC_J):
-        case LCTL_T(KC_S):
-        case LCTL_T(KC_L):
+        case LCTL_T(KC_F):
+        case LCTL_T(KC_J):
             return 0;
         default:
             return QUICK_TAP_TERM;
@@ -164,8 +162,11 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 // Retro tapping for left gui and left shift home row
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LGUI_T(KC_A):
-        case LGUI_T(KC_SCLN):
+        case GUI_T(KC_S):
+        case LGUI_T(KC_L):
+        case LALT_T(KC_A):
+        case LALT_T(KC_SCLN):
+        case LT(SYMB_NAV,KC_SPC):
             return true;
         default:
             return false;
@@ -180,8 +181,8 @@ enum combos {
     ComDot_DEL,
     CV_GERMAN,
 };
-const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LT(SYMB_NAV,KC_F), COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LCTL_T(KC_L), COMBO_END};
+const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {LSFT_T(KC_K), LGUI_T(KC_L), COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
