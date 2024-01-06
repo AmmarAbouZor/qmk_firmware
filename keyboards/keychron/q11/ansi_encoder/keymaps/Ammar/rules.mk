@@ -3,7 +3,7 @@ VIA_ENABLE = yes
 COMBO_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 
-VPATH += keyboards/keychron/common
-SRC += keychron_common.c
+# VPATH += keyboards/keychron/common
+# SRC += keychron_common.c
 
 SRC += features/achordion.c
