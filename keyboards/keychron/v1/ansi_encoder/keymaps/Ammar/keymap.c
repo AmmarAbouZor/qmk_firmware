@@ -250,7 +250,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
     return true;
 }
 
-// *** macros ***
+// *** achordion & macros ***
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
 
