@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "features/achordion.h"
 #include QMK_KEYBOARD_H
 // #include "keychron_common.h"
 
@@ -204,8 +205,55 @@ combo_t key_combos[] = {
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
 
+// *** achordion ***
+void matrix_scan_user(void) {
+  achordion_task();
+}
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  return 200;
+}
+
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+    switch (tap_hold_keycode) {
+    case LSFT_T(KC_D):
+        switch (other_keycode) {
+            case LALT_T(KC_A):
+            case LT(SYMB_NAV,KC_SPC):
+                return false;
+        }
+        break;
+    case LCTL_T(KC_F):
+        switch (other_keycode) {
+            case LSFT_T(KC_D):
+            case LT(SYMB_NAV,KC_SPC):
+                return false;
+        }
+        break;
+    case LSFT_T(KC_K):
+        switch (other_keycode) {
+            case LT(SYMB_NAV,KC_SPC):
+                return false;
+        }
+        break;
+    case LCTL_T(KC_J):
+        switch (other_keycode) {
+            case LT(SYMB_NAV,KC_SPC):
+                return false;
+        }
+        break;
+    }
+
+    return true;
+}
+
 // *** macros ***
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_achordion(keycode, record)) { return false; }
+
     switch (keycode) {
     case DE_SFU:
         if (record->event.pressed) {
