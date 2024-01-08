@@ -103,8 +103,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(SYMB_NAV,KC_SPC):
-            return TAPPING_TERM - 40;
         case HOME_D:
         case HOME_K:
             return TAPPING_TERM - 68;
@@ -150,11 +148,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// TODO: remove spacebar if you stick with new layout
 // Disable quick term for backspace, spacebar, Control and Shift
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(SYMB_NAV,KC_BSPC):
         case LT(NUMS,KC_ESC):
         case HOME_D:
         case HOME_K:
@@ -168,11 +164,11 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Retro tapping for left gui home row and spacebar
+// Retro tapping for gui home row
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case HOME_L:
-        case HOME_SC:
+        case HOME_G:
+        case HOME_H:
             return true;
         default:
             return false;
