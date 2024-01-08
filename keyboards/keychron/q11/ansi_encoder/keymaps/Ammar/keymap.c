@@ -112,7 +112,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 60;
         case HOME_S:
         case HOME_L:
-            return TAPPING_TERM - 40;
+            return TAPPING_TERM - 60;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 20;
@@ -154,11 +154,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(NUMS,KC_ESC):
         case HOME_D:
-        case HOME_K:
         case HOME_F:
-        case HOME_J:
         case HOME_S:
-        case HOME_L:
             return 0;
         default:
             return QUICK_TAP_TERM;
