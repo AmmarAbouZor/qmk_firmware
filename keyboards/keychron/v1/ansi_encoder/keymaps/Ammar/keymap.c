@@ -23,8 +23,8 @@
 enum layers{
     BASE,
     FN,
-    SYMB_NAV,
-    NUMS
+    SYMB,
+    NAV_NUMS
 };
 
 enum custom_keycodes {
@@ -43,56 +43,59 @@ enum custom_keycodes {
 #define KC_FLXP LGUI(KC_E)
 
 #define HOME_A LALT_T(KC_A)
-#define HOME_S LT(SYMB_NAV, KC_S)
+#define HOME_S LGUI_T(KC_S)
 #define HOME_D LSFT_T(KC_D)
 #define HOME_F LCTL_T(KC_F)
-#define HOME_G LGUI_T(KC_G)
-#define HOME_H LGUI_T(KC_H)
+#define HOME_G MT(MOD_LSFT | MOD_LALT, KC_G)
 #define HOME_J LCTL_T(KC_J)
 #define HOME_K LSFT_T(KC_K)
-#define HOME_L LT(SYMB_NAV, KC_L)
+#define HOME_L LGUI_T(KC_L)
 #define HOME_SC LALT_T(KC_SCLN)
+#define HOME_CAPS LT(NAV_NUMS, KC_ESC)
+#define HOME_ENT LT(NAV_NUMS, KC_ENT)
+#define HOME_SPC LT(SYMB, KC_SPC)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_DEL,             KC_MUTE,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BSPC,   KC_BSPC,  KC_BSPC,            KC_PGUP,
-        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,   KC_RBRC,  KC_BSLS,            KC_PGDN,
-        LT(NUMS,KC_ESC), HOME_A, HOME_S, HOME_D, HOME_F, HOME_G,  HOME_H,   HOME_J,   HOME_K,     HOME_L,   HOME_SC,  KC_QUOT, LT(NUMS,KC_ENT),  KC_HOME,
-        OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
-        KC_LCTL,  KC_LCMD,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,   KC_EQL,  KC_BSPC,            KC_PGUP,
+        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC,  KC_BSPC,  KC_BSLS,            KC_PGDN,
+        HOME_CAPS, HOME_A, HOME_S,  HOME_D,   HOME_F,   HOME_G,     KC_H,   HOME_J,   HOME_K,     HOME_L,  HOME_SC,  HOME_ENT,            HOME_ENT,            KC_HOME,
+        OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,       OSM(MOD_RSFT),  KC_UP,
+        KC_LCTL,  KC_LCMD,  KC_LALT,                             HOME_SPC,                                 KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,   DE_SFU,   DE_SFA,   DE_SFO,  _______,  _______,    _______,  _______,            _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,     DE_U,     DE_A,     DE_O,     DE_S,  _______,              _______,            _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
+        _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
-    [SYMB_NAV] = LAYOUT_ansi_82(
+    [SYMB] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            _______,
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
-        CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN, KC_LCBR,    KC_RCBR,  _______,            _______,
-        KC_LCTL, KC_EXCLAIM, KC_MINS, KC_PLUS,   KC_EQL,  KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,              KC_APP,            _______,
-        _______,            _______,   KC_GRV,  KC_LSFT,  KC_LCTL,   CW_TOGG,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
+        _______,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_PIPE,  KC_BSLS, _______,    _______,  _______,            _______,
+        _______, KC_EXCLAIM, KC_MINS, KC_PLUS,   KC_EQL,  KC_LBRC,   KC_LPRN,  KC_LCBR,  KC_UNDS,  KC_QUOT,   KC_DQT, _______,              _______,            _______,
+        _______,            _______,  _______,  _______,   KC_GRV,   KC_RBRC,  KC_RPRN,  KC_RCBR,    KC_LT,    KC_GT, KC_QUES,              KC_CAPS,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
-    [NUMS] = LAYOUT_ansi_82(
+    [NAV_NUMS] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            _______,
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
-        _______,  _______,  _______,  KC_PGUP,  _______,  _______,  _______,    KC_7,    KC_8,      KC_9,  _______,  _______,    _______,  _______,            _______,
-        _______,  _______, KC_HOME, KC_PGDN, KC_END, _______, KC_BSPC,  KC_4,    KC_5,      KC_6,  _______,  _______,              _______,            _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  _______,   KC_1,      KC_2,     KC_3,  _______,              _______,  _______,
-        _______,  _______,  _______,                                KC_0,                                _______,  _______,    _______,  _______,  _______,  _______),
+        _______,  _______,     KC_7,     KC_8,     KC_9,   KC_APP,  _______,  KC_PGUP,  KC_BSPC,  KC_PGDN,  _______,  _______,    _______,  _______,            _______,
+        _______,     KC_0,     KC_4,     KC_5,     KC_6,  KC_LCTL,  KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  _______,  _______,              _______,            _______,
+        _______,            _______,     KC_1,     KC_2,     KC_3,  CW_TOGG,   KC_TAB,   KC_ENT,  KC_HOME,   KC_END,  _______,              _______,  _______,
+        _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [SYMB_NAV] = { ENCODER_CCW_CW(WIN_DESK_PREV, WIN_DESK_NEXT)},
-    [NUMS]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
+    [SYMB] = { ENCODER_CCW_CW(WIN_DESK_PREV, WIN_DESK_NEXT)},
+    [NAV_NUMS]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
 #endif // ENCODER_MAP_ENABLE
 
@@ -109,9 +112,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_F:
         case HOME_J:
             return TAPPING_TERM - 60;
-        case HOME_S:
-        case HOME_L:
-            return TAPPING_TERM - 55;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 40;
@@ -120,26 +120,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// // Permissive Hold for index and middle finger in homerow
-// bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-//     switch (keycode) {
-//         // case LSFT_T(KC_D):
-//         // case LSFT_T(KC_K):
-//         case LCTL_T(KC_F):
-//         case LCTL_T(KC_J):
-//             // Immediately select the hold action when another key is tapped.
-//             return true;
-//         default:
-//             // Do not select the hold action when another key is tapped.
-//             return false;
-//     }
-// }
-
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(NUMS,KC_ESC):
-        case LT(NUMS,KC_ENT):
+        case HOME_CAPS:
+        case HOME_ENT:
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
@@ -148,16 +133,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Disable quick term for backspace, spacebar, Control and Shift
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(NUMS,KC_ESC):
+        case HOME_CAPS:
+        case HOME_ENT:
         case HOME_D:
         case HOME_F:
         case HOME_S:
         case HOME_K:
         case HOME_J:
-        case HOME_H:
             return 0;
         default:
             return QUICK_TAP_TERM;
@@ -167,25 +151,13 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 // Retro tapping for gui home row
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case HOME_G:
-        case HOME_H:
+        case HOME_S:
+        case HOME_L:
             return true;
         default:
             return false;
     }
 }
-
-
-// This made problems with the fast shift modifier with words ending with d or k
-// // *** Keys overrides
-// const key_override_t backspace_space_override = ko_make_basic(MOD_MASK_SHIFT, LT(SYMB_NAV,KC_SPC), KC_BSPC);
-//
-// // This globally defines all key overrides to be used
-// const key_override_t **key_overrides = (const key_override_t *[]){
-//     &backspace_space_override,
-//     NULL // Null terminate the array of overrides!
-// };
-//
 
 // *** Combos ***
 enum combos {
@@ -225,7 +197,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_S:
             case HOME_F:
-            case KC_SPC:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -245,7 +217,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_E:
             case KC_C:
             case KC_V:
-            case KC_SPC:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -254,7 +226,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_S:
             case HOME_D:
             case HOME_F:
-            case KC_SPC:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -263,7 +235,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_L:
             case HOME_SC:
-            case KC_SPC:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -280,7 +252,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_SC:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_I:
             case KC_M:
                 return false;
@@ -291,7 +263,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_L:
-            case KC_SPC:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -367,4 +339,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     return true;
 };
-
