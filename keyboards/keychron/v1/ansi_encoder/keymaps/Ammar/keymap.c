@@ -111,7 +111,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 60;
         case HOME_S:
         case HOME_L:
-            return TAPPING_TERM - 50;
+            return TAPPING_TERM - 55;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 40;
@@ -155,6 +155,9 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_D:
         case HOME_F:
         case HOME_S:
+        case HOME_K:
+        case HOME_J:
+        case HOME_H:
             return 0;
         default:
             return QUICK_TAP_TERM;
@@ -231,7 +234,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_S:
             case HOME_D:
-            case KC_SPC:
                 return false;
         }
         break;
@@ -270,7 +272,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_K:
             case HOME_L:
             case HOME_SC:
-            case KC_SPC:
                 return false;
         }
         break;
