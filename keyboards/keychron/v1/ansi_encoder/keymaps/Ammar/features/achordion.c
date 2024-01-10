@@ -36,6 +36,10 @@ static uint16_t hold_timer = 0;
 // Eagerly applied mods, if any.
 static uint8_t eager_mods = 0;
 
+// AMMAR: Check the time period between end of tapping term and end of achordion term.
+// I use this to tapping for home row shift and control keys if they are released before achordion term
+static bool in_between = false;
+
 #    ifdef ACHORDION_STREAK
 // Timer for typing streak
 static uint16_t streak_timer = 0;
@@ -116,6 +120,8 @@ bool process_achordion(uint16_t keycode, keyrecord_t* record) {
                     }
                 }
 
+                in_between = true;
+
                 dprintf("Achordion: Key 0x%04X pressed.%s\n", keycode, eager_mods ? " Set eager mods." : "");
                 return false; // Skip default handling.
             }
@@ -134,12 +140,36 @@ bool process_achordion(uint16_t keycode, keyrecord_t* record) {
             tap_hold_record.event.pressed = false;
             // Plumb hold release event.
             recursively_process_record(&tap_hold_record, STATE_RELEASED);
+        } else if (in_between) {
+            // Release happened between end of tapping term for modifiers and end of achordion time
+            dprintln("Achordion: Desiscion to Tap due to in_between logic");
+
+            clear_eager_mods(); // Clear in case eager mods were set.
+
+            dprintln("Achordion: Plumbing tap press.");
+            tap_hold_record.tap.count       = 1; // Revise event as a tap.
+            tap_hold_record.tap.interrupted = true;
+            // Plumb tap press event.
+            recursively_process_record(&tap_hold_record, STATE_TAPPING);
+
+            send_keyboard_report();
+#    if TAP_CODE_DELAY > 0
+            wait_ms(TAP_CODE_DELAY);
+#    endif // TAP_CODE_DELAY > 0
+
+            dprintln("Achordion: Plumbing tap release.");
+            tap_hold_record.event.pressed = false;
+            // Plumb tap release event.
+            recursively_process_record(&tap_hold_record, STATE_TAPPING);
         } else {
             dprintf("Achordion: Key released.%s\n", eager_mods ? " Clearing eager mods." : "");
             if (is_mt) {
                 clear_eager_mods();
             }
         }
+
+        // Reset in_between
+        in_between = false;
 
         achordion_state = STATE_RELEASED;
         return false;
@@ -199,6 +229,7 @@ bool process_achordion(uint16_t keycode, keyrecord_t* record) {
 
 void achordion_task(void) {
     if (achordion_state == STATE_UNSETTLED && timer_expired(timer_read(), hold_timer)) {
+        in_between = false;
         dprintln("Achordion: Timeout. Plumbing hold press.");
         settle_as_hold(); // Timeout expired, settle the key as held.
     }

@@ -5,3 +5,6 @@ CAPS_WORD_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 
 SRC += features/achordion.c
+
+# CONSOLE_ENABLE = yes
+
