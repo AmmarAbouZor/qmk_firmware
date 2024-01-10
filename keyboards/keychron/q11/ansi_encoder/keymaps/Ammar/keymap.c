@@ -121,21 +121,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// // Permissive Hold for index and middle finger in homerow
-// bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-//     switch (keycode) {
-//         // case LSFT_T(KC_D):
-//         // case LSFT_T(KC_K):
-//         case LCTL_T(KC_F):
-//         case LCTL_T(KC_J):
-//             // Immediately select the hold action when another key is tapped.
-//             return true;
-//         default:
-//             // Do not select the hold action when another key is tapped.
-//             return false;
-//     }
-// }
-
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -174,6 +159,21 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
             return false;
     }
 }
+
+
+// *** Keys overrides ***
+// overrides on base layer only
+const key_override_t ctrl_zero_override = ko_make_with_layers(MOD_MASK_CTRL, KC_0, C(KC_BSPC), 1);
+const key_override_t ctrl_nine_override = ko_make_with_layers(MOD_MASK_CTRL, KC_9, KC_BSPC, 1);
+const key_override_t ctrl_eight_override = ko_make_with_layers(MOD_MASK_CTRL, KC_8, KC_BSPC, 1);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &ctrl_zero_override,
+    &ctrl_nine_override,
+    &ctrl_eight_override,
+    NULL // Null terminate the array of overrides!
+};
 
 
 // *** Combos ***
