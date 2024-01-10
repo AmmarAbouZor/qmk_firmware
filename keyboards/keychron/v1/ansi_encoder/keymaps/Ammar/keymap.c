@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NUMS] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            _______,
-        _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
+        _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,  KC_BSPC,  KC_BSPC,  KC_BSPC,  KC_BSPC,     KC_F12,  _______,            _______,
         _______,  _______,  _______,  KC_PGUP,  _______,  _______,  _______,    KC_7,    KC_8,      KC_9,  _______,  _______,    _______,  _______,            _______,
         _______,  _______, KC_HOME, KC_PGDN, KC_END, _______, KC_BSPC,  KC_4,    KC_5,      KC_6,  _______,  _______,              _______,            _______,
         _______,            _______,  _______,  _______,  _______,  _______,  _______,   KC_1,      KC_2,     KC_3,  _______,              _______,  _______,
@@ -104,6 +104,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
+            return TAPPING_TERM - 60;
         case HOME_G:
             return TAPPING_TERM - 40;
         case HOME_D:
