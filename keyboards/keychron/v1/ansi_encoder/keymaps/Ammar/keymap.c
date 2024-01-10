@@ -238,7 +238,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_E:
             case KC_C:
             case KC_V:
-            case HOME_SPC:
                 return false;
         }
         break;
@@ -273,7 +272,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_SC:
-            case HOME_SPC:
             case KC_I:
             case KC_M:
                 return false;
