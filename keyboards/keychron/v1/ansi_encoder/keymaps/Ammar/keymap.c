@@ -104,12 +104,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-            return TAPPING_TERM - 60;
+            return TAPPING_TERM - 70;
         case HOME_G:
             return TAPPING_TERM - 40;
         case HOME_D:
         case HOME_K:
-            return TAPPING_TERM - 68;
+            return TAPPING_TERM - 77;
         case HOME_F:
         case HOME_J:
             return TAPPING_TERM - 60;
@@ -152,6 +152,7 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 // Retro tapping for gui home row
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case HOME_SPC:
         case HOME_S:
         case HOME_L:
             return true;
@@ -201,7 +202,7 @@ void matrix_scan_user(void) {
 }
 
 uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  return 250;
+  return 230;
 }
 
 bool achordion_eager_mod(uint8_t mod) {
