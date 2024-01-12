@@ -105,7 +105,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-            return TAPPING_TERM - 70;
+            return TAPPING_TERM - 80;
         case HOME_G:
             return TAPPING_TERM - 40;
         case HOME_D:
@@ -113,7 +113,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 77;
         case HOME_F:
         case HOME_J:
-            return TAPPING_TERM - 60;
+            return TAPPING_TERM - 70;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 40;
@@ -229,6 +229,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_S:
             case HOME_D:
+            case HOME_SPC:
                 return false;
         }
         break;
@@ -266,6 +267,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_K:
             case HOME_L:
             case HOME_SC:
+            case HOME_SPC:
                 return false;
         }
         break;
