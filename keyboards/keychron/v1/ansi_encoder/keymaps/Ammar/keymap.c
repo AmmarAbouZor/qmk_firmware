@@ -196,6 +196,17 @@ combo_t key_combos[] = {
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
 
+// Increase the time for Escape and Tab
+int16_t get_combo_term(uint16_t index, combo_t *combo) {
+    switch (index) {
+        case DF_ESC:
+        case KL_TAB:
+            return 70;
+    }
+
+    return COMBO_TERM;
+}
+
 // *** achordion ***
 void matrix_scan_user(void) {
   achordion_task();
