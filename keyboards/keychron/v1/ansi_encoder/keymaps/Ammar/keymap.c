@@ -52,13 +52,14 @@ enum custom_keycodes {
 #define HOME_L LGUI_T(KC_L)
 #define HOME_SC LALT_T(KC_SCLN)
 #define HOME_SPC LT(SYMB_NAV, KC_SPC)
+#define HOME_CPS LT(NUMS,KC_BSPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_DEL,             KC_MUTE,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_BSPC,   KC_BSPC,  KC_BSPC,            KC_PGUP,
+        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,    KC_EQL,  KC_BSPC,            KC_PGUP,
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,   KC_RBRC,  KC_BSLS,            KC_PGDN,
-        LT(NUMS,KC_ESC), HOME_A, HOME_S, HOME_D, HOME_F, HOME_G,    KC_H,   HOME_J,   HOME_K,     HOME_L,   HOME_SC,  KC_QUOT, LT(NUMS,KC_ENT),  KC_HOME,
+        HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,   HOME_G,     KC_H,   HOME_J,   HOME_K,     HOME_L,   HOME_SC,  KC_QUOT, LT(NUMS,KC_ENT),  KC_HOME,
         OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
         KC_LCTL,  KC_LCMD,  KC_LALT,                                HOME_SPC,                                 KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
@@ -124,7 +125,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(NUMS,KC_ESC):
+        case HOME_CPS:
         case LT(NUMS,KC_ENT):
             // Immediately select the hold action when another key is pressed.
             return true;
@@ -137,7 +138,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 // Disable quick term for backspace, spacebar, Control and Shift
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(NUMS,KC_ESC):
+        case HOME_CPS:
         case HOME_SPC:
         case HOME_D:
         case HOME_F:
@@ -162,36 +163,39 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-// *** Keys overrides ***
-// overrides on base layer only
-const key_override_t ctrl_zero_override = ko_make_with_layers(MOD_MASK_CTRL, KC_0, C(KC_BSPC), 1);
-const key_override_t ctrl_nine_override = ko_make_with_layers(MOD_MASK_CTRL, KC_9, KC_BSPC, 1);
-const key_override_t ctrl_eight_override = ko_make_with_layers(MOD_MASK_CTRL, KC_8, KC_BSPC, 1);
-
-// This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
-    &ctrl_zero_override,
-    &ctrl_nine_override,
-    &ctrl_eight_override,
-    NULL // Null terminate the array of overrides!
-};
-
+// // *** Keys overrides ***
+// // overrides on base layer only
+// const key_override_t ctrl_zero_override = ko_make_with_layers(MOD_MASK_CTRL, KC_0, C(KC_BSPC), 1);
+// const key_override_t ctrl_nine_override = ko_make_with_layers(MOD_MASK_CTRL, KC_9, KC_BSPC, 1);
+// const key_override_t ctrl_eight_override = ko_make_with_layers(MOD_MASK_CTRL, KC_8, KC_BSPC, 1);
+//
+// // This globally defines all key overrides to be used
+// const key_override_t **key_overrides = (const key_override_t *[]){
+//     &ctrl_zero_override,
+//     &ctrl_nine_override,
+//     &ctrl_eight_override,
+//     NULL // Null terminate the array of overrides!
+// };
+//
 
 // *** Combos ***
 enum combos {
     DF_ESC,
     KL_TAB,
+    JK_ENTER,
     ComDot_DEL,
     CV_GERMAN,
 };
 const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
 const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
     [KL_TAB]   = COMBO(kl_combo, KC_TAB),
+    [JK_ENTER]   = COMBO(jk_combo, KC_ENT),
     [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
@@ -201,6 +205,7 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
         case DF_ESC:
         case KL_TAB:
+        case JK_ENTER:
             return 70;
     }
 
