@@ -105,15 +105,15 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-            return TAPPING_TERM - 80;
+            return TAPPING_TERM - 90;
         case HOME_G:
             return TAPPING_TERM - 40;
         case HOME_D:
         case HOME_K:
-            return TAPPING_TERM - 77;
+            return TAPPING_TERM - 90;
         case HOME_F:
         case HOME_J:
-            return TAPPING_TERM - 70;
+            return TAPPING_TERM - 80;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 40;
@@ -236,6 +236,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_S:
             case HOME_F:
             case HOME_SPC:
+            case KC_W:
+            case KC_E:
+            case KC_R:
+            case KC_T:
                 return false;
         }
         break;
@@ -245,6 +249,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_S:
             case HOME_D:
             case HOME_SPC:
+            case KC_W:
+            case KC_E:
+            case KC_R:
+            case KC_T:
                 return false;
         }
         break;
@@ -253,7 +261,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_D:
             case HOME_F:
+            case KC_W:
             case KC_E:
+            case KC_R:
+            case KC_T:
             case KC_C:
             case KC_V:
                 return false;
@@ -265,6 +276,12 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_D:
             case HOME_F:
             case HOME_SPC:
+            case KC_W:
+            case KC_E:
+            case KC_R:
+            case KC_T:
+            case KC_C:
+            case KC_V:
                 return false;
         }
         break;
@@ -274,6 +291,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_L:
             case HOME_SC:
             case HOME_SPC:
+            case KC_U:
+            case KC_I:
+            case KC_O:
+            case KC_P:
                 return false;
         }
         break;
@@ -283,6 +304,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_L:
             case HOME_SC:
             case HOME_SPC:
+            case KC_U:
+            case KC_I:
+            case KC_O:
+            case KC_P:
                 return false;
         }
         break;
@@ -291,8 +316,12 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_SC:
+            case KC_U:
             case KC_I:
+            case KC_O:
+            case KC_P:
             case KC_M:
+            case KC_N:
                 return false;
         }
         break;
@@ -302,6 +331,12 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_K:
             case HOME_L:
             case HOME_SPC:
+            case KC_U:
+            case KC_I:
+            case KC_O:
+            case KC_P:
+            case KC_M:
+            case KC_N:
                 return false;
         }
         break;
