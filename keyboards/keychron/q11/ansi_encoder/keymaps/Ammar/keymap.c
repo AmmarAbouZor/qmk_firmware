@@ -54,6 +54,7 @@ enum custom_keycodes {
 #define HOME_SC LALT_T(KC_SCLN)
 #define HOME_SPC LT(SYMB_NAV, KC_SPC)
 #define HOME_CPS LT(NUMS,KC_BSPC)
+#define HOME_SHFT LSFT_T(KC_CAPS) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_91_ansi(
@@ -61,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,     KC_EQL,   KC_BSPC,            KC_PGUP,
         _______,  KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,  KC_BSLS,            KC_PGDN,
         _______,  HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,   HOME_G,     KC_H,   HOME_J,   HOME_K,   HOME_L,  HOME_SC,   KC_QUOT, LT(NUMS,KC_ENT), KC_HOME,
-        _______,  OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              OSM(MOD_RSFT),  KC_UP,
+        _______, HOME_SHFT,      KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
         _______,  KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),              HOME_SPC,                    HOME_SPC,             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_91_ansi(
@@ -77,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  KC_LCBR,    KC_RCBR,  _______,            _______,
         _______,   KC_SPC, KC_EXCLAIM, KC_MINS, KC_PLUS,   KC_EQL,  KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  _______,               KC_APP,            _______,
-        _______,  _______,            _______,   KC_GRV,  KC_LSFT,  KC_LCTL,   CW_TOGG,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
+        _______,  _______,            _______,   KC_GRV,  KC_LSFT,  KC_LCTL,    KC_DEL,   KC_TAB,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,  _______,  _______,             KC_SPC,                        KC_SPC,            _______,  _______,    _______,  _______,  _______,  _______),
 
     [NUMS] = LAYOUT_91_ansi(
@@ -127,6 +128,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_CPS:
+        case HOME_SHFT:
         case LT(NUMS,KC_ENT):
             // Immediately select the hold action when another key is pressed.
             return true;
@@ -184,20 +186,20 @@ enum combos {
     DF_ESC,
     KL_TAB,
     JK_ENTER,
-    ComDot_DEL,
+    // ComDot_DEL,
     CV_GERMAN,
 };
 const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
-const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
+// const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, KC_ESC),
     [KL_TAB]   = COMBO(kl_combo, KC_TAB),
     [JK_ENTER]   = COMBO(jk_combo, KC_ENT),
-    [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
+    // [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
 
@@ -205,9 +207,12 @@ combo_t key_combos[] = {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
         case DF_ESC:
-        case KL_TAB:
-        case JK_ENTER:
             return 70;
+        case JK_ENTER:
+            return 60;
+        // case ComDot_DEL:
+        case KL_TAB:
+            return 35;
     }
 
     return COMBO_TERM;
@@ -394,6 +399,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DE_S:
         if (record->event.pressed) {
             SEND_STRING(SS_LCTL(SS_LSFT("u"))"00df"SS_TAP(X_SPC));
+        }
+        break;
+        // Toggle caps word on shift tap
+    case HOME_SHFT:
+        if (record->tap.count) {
+            if(record->event.pressed) {
+                caps_word_toggle();
+            }
+            return false;
         }
         break;
     }
