@@ -207,7 +207,7 @@ combo_t key_combos[] = {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
         case DF_ESC:
-            return 70;
+            return 90;
         case JK_ENTER:
             return 60;
         // case ComDot_DEL:
