@@ -107,17 +107,19 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
             return TAPPING_TERM - 90;
-        case HOME_Q:
-            return TAPPING_TERM - 40;
         case HOME_D:
         case HOME_K:
             return TAPPING_TERM - 90;
         case HOME_F:
         case HOME_J:
-            return TAPPING_TERM - 75;
+            return TAPPING_TERM - 80;
         case HOME_A:
         case HOME_SC:
             return TAPPING_TERM + 40;
+        case HOME_S:
+        case HOME_L:
+        case HOME_Q:
+            return TAPPING_TERM - 40;
         default:
             return TAPPING_TERM;
     }
@@ -206,7 +208,7 @@ combo_t key_combos[] = {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
         case DF_ESC:
-            return 90;
+            return 100;
         case JK_ENTER:
             return 60;
         // case ComDot_DEL:
