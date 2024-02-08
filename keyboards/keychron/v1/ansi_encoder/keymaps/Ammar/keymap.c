@@ -54,7 +54,8 @@ enum custom_keycodes {
 #define HOME_SPC LT(SYMB_NAV, KC_SPC)
 #define HOME_CPS LT(NUMS, CW_TOGG) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
 // #define HOME_SHFT LSFT_T(KC_CAPS) // TODO: remove if the caps worked.
-#define HOME_EQL LT(NUMS,KC_EQL)
+#define HOME_EQL LCTL_T(KC_EQL)
+#define HOME_PLUS LSFT_T(KC_PLUS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_ansi_82(
@@ -77,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            KC_MUTE,
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN, KC_LCBR,    KC_RCBR,  _______,            _______,
-         KC_SPC, KC_EXCLAIM, KC_MINS, KC_PLUS, HOME_EQL,  KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  KC_GRV,               KC_APP,            _______,
+         KC_SPC, KC_EXCLAIM, KC_MINS, HOME_PLUS, HOME_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,  KC_GRV,               KC_APP,            _______,
         _______,            KC_LCTL,   KC_LSFT,  KC_TAB,   KC_DEL,    KC_APP,   KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -86,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  _______,  _______,  KC_PGUP,  _______,  _______,  _______,    KC_7,    KC_8,      KC_9,  _______,  _______,    _______,  _______,            _______,
         _______,  _______, KC_HOME, KC_PGDN, KC_END, _______,   KC_0,  KC_4,    KC_5,      KC_6,  _______,  _______,              _______,            _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  C(KC_BSPC),   KC_1,      KC_2,     KC_3,  _______,              _______,  _______,
+        _______,            _______,  _______,  _______,  _______,  _______,        KC_0,   KC_1,      KC_2,     KC_3,  _______,              _______,  _______,
         _______,  _______,  _______,                                KC_0,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
 
@@ -113,7 +114,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 90;
         case HOME_F:
         case HOME_J:
-        case HOME_EQL:
             return TAPPING_TERM - 75;
         case HOME_A:
         case HOME_SC:
@@ -122,6 +122,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_L:
         case HOME_Q:
             return TAPPING_TERM - 40;
+        case HOME_EQL:
+        case HOME_PLUS:
+            return TAPPING_TERM - 20;
         default:
             return TAPPING_TERM;
     }
@@ -148,6 +151,7 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_D:
         case HOME_F:
         case HOME_EQL:
+        case HOME_PLUS:
         case HOME_K:
         case HOME_J:
             return 0;
@@ -364,6 +368,21 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                 return false;
         }
         break;
+    case HOME_PLUS:
+        switch (other_keycode) {
+            case KC_TILDE:
+            case KC_AT:
+            case KC_HASH:
+            case KC_DOLLAR:
+            case KC_PERCENT:
+            case KC_EXCLAIM:
+            case KC_MINS:
+            case KC_EQL:
+            case KC_UNDS:
+            case KC_SPC:
+                return false;
+        }
+        break;
     }
 
     return true;
@@ -437,6 +456,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->tap.count) {
             if(record->event.pressed) {
                 caps_word_toggle();
+            }
+            return false;
+        }
+        break;
+    // Plus can't be sent with the shift together and must be sent manually
+    case HOME_PLUS:
+        if (record->tap.count) {
+            if(record->event.pressed) {
+                tap_code16(KC_PLUS);
             }
             return false;
         }
