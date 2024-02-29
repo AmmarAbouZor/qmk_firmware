@@ -176,6 +176,29 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 }
 
 
+// *** Caps Words ***
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        // AMMAR: This is the only difference from the default.
+        case KC_MINS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+
 // // *** Keys overrides ***
 // // overrides on base layer only
 // const key_override_t ctrl_zero_override = ko_make_with_layers(MOD_MASK_CTRL, KC_0, C(KC_BSPC), 1);
