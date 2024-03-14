@@ -35,8 +35,6 @@ enum custom_keycodes {
     DE_SFO,
     DE_O,
     DE_S,
-    WIN_DESK_PREV,
-    WIN_DESK_NEXT,
     TODO_AAZ,
 };
 
@@ -96,8 +94,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [SYMB_NAV] = { ENCODER_CCW_CW(WIN_DESK_PREV, WIN_DESK_NEXT)},
-    [NUMS]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
+    [SYMB_NAV] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
+    [NUMS]   = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT)}
 };
 #endif // ENCODER_MAP_ENABLE
 
@@ -495,6 +493,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 // ******* German Letters & Switching Virtual Desktop on Windows *******
+//
+// *** Add those to the macros ***
+// WIN_DESK_PREV,
+// WIN_DESK_NEXT,
 //
 // switch (keycode) {
 // case DE_SFU:
