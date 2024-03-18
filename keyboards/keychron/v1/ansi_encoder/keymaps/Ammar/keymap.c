@@ -109,9 +109,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_SPC:
             return TAPPING_TERM - 85;
         case HOME_D:
-            return TAPPING_TERM - 95;
+            return TAPPING_TERM - 85;
         case HOME_K:
-            return TAPPING_TERM - 110;
+            return TAPPING_TERM - 100;
         case HOME_F:
             return TAPPING_TERM - 85;
         case HOME_J:
