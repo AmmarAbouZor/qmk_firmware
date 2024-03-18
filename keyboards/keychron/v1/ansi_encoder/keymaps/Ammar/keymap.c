@@ -331,6 +331,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_I:
             case KC_O:
             case KC_P:
+            case KC_M:
+            case KC_N:
                 return false;
         }
         break;
