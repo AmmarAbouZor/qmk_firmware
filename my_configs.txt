@@ -1,0 +1,6 @@
+find.keymap=default
+mass_compile.keymap=default
+# user.keyboard=keychron/v1/ansi_encoder ## This is for v1 keyboard
+user.keyboard=keychron/q11/ansi_encoder
+user.keymap=Ammar
+user.qmk_home=/home/ammar/repos/qmk_firmware

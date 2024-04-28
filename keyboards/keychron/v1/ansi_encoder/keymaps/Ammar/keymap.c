@@ -108,7 +108,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-            return TAPPING_TERM - 80;
+            return TAPPING_TERM - 90;
         case HOME_D:
             return TAPPING_TERM - 85;
         case HOME_K:
