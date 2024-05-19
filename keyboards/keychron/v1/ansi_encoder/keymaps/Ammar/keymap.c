@@ -36,7 +36,6 @@ enum custom_keycodes {
     DE_O,
     DE_S,
     TODO_AAZ,
-    EQ_SPC,
 };
 
 #define KC_TASK LGUI(KC_TAB)
@@ -218,15 +217,12 @@ enum combos {
     JK_ENTER,
     // ComDot_DEL,
     CV_GERMAN,
-    // This is work-around to solve the space after equal in the navigation layer because the f key is also control key there which activate Ctrl+Space instead of '= '
-    FCAPS_EQ_SPC,
 };
 const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
 // const uint16_t PROGMEM comdot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM eq_spc_combo[] = {HOME_EQL, KC_SPC, COMBO_END};
 
 combo_t key_combos[] = {
     [DF_ESC]   = COMBO(df_combo, MT(MOD_LSFT | MOD_LCTL,KC_ESC)),
@@ -234,7 +230,6 @@ combo_t key_combos[] = {
     [JK_ENTER]   = COMBO(jk_combo, MT(MOD_RSFT | MOD_RCTL,KC_ENT)),
     // [ComDot_DEL] = COMBO(comdot_combo, KC_DEL),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
-    [FCAPS_EQ_SPC] = COMBO(eq_spc_combo, EQ_SPC),
 };
 
 // Increase the time for Escape and Tab
@@ -247,8 +242,6 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
         // case ComDot_DEL:
         case KL_TAB:
             return 35;
-        case FCAPS_EQ_SPC:
-            return 120;
     }
 
     return COMBO_TERM;
@@ -397,6 +390,11 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_PLUS:
             case KC_UNDS:
             case KC_SPC:
+            case HOME_A:
+            case HOME_S:
+            case HOME_D:
+            case HOME_Q:
+            case HOME_CPS:
                 return false;
         }
         break;
@@ -412,6 +410,11 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_EQL:
             case KC_UNDS:
             case KC_SPC:
+            case HOME_A:
+            case HOME_S:
+            case HOME_F:
+            case HOME_Q:
+            case HOME_CPS:
                 return false;
         }
         break;
@@ -472,11 +475,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TODO_AAZ:
         if (record->event.pressed) {
             SEND_STRING("TODO AAZ:");
-        }
-        break;
-    case EQ_SPC:
-        if (record->event.pressed) {
-            SEND_STRING("= ");
         }
         break;
     // Toggle caps word on shift Caps-Lock
