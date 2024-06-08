@@ -260,6 +260,23 @@ bool achordion_eager_mod(uint8_t mod) {
     return false;
 }
 
+uint16_t achordion_streak_chord_timeout(
+    uint16_t tap_hold_keycode, uint16_t next_keycode) {
+
+    switch (tap_hold_keycode) {
+    case HOME_D:
+    case HOME_K:
+        return 80;
+    case HOME_J:
+    case HOME_F:
+    case HOME_SPC:
+    case HOME_CPS:
+        return 0;
+    }
+
+  return 100;
+}
+
 bool achordion_chord(uint16_t tap_hold_keycode,
                      keyrecord_t* tap_hold_record,
                      uint16_t other_keycode,

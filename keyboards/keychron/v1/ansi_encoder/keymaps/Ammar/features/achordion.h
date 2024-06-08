@@ -57,7 +57,8 @@
  * Suppress tap-hold mods within a *typing streak* by defining
  * ACHORDION_STREAK. This can help preventing accidental mod
  * activation when performing a fast tapping sequence.
- * This is inspired by https://sunaku.github.io/home-row-mods.html#typing-streaks
+ * This is inspired by
+ * https://sunaku.github.io/home-row-mods.html#typing-streaks
  *
  * Enable with:
  *
@@ -66,11 +67,17 @@
  * Adjust the maximum time between key events before modifiers can be enabled
  * by defining the following callback in your keymap.c:
  *
- *    uint16_t achordion_streak_timeout(uint16_t tap_hold_keycode) {
- *      return 100;  // Default of 100 ms.
+ *    uint16_t achordion_streak_chord_timeout(
+ *        uint16_t tap_hold_keycode, uint16_t next_keycode) {
+ *      return 200;  // Default of 200 ms.
  *    }
  */
 #ifdef ACHORDION_STREAK
+uint16_t achordion_streak_chord_timeout(uint16_t tap_hold_keycode, uint16_t next_keycode);
+
+bool achordion_streak_continue(uint16_t keycode);
+
+/** @deprecated Use `achordion_streak_chord_timeout()` instead. */
 uint16_t achordion_streak_timeout(uint16_t tap_hold_keycode);
 #endif
 

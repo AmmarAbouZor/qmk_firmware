@@ -49,3 +49,5 @@
 
 #define COMBO_TERM 50
 #define COMBO_TERM_PER_COMBO
+
+#define ACHORDION_STREAK
