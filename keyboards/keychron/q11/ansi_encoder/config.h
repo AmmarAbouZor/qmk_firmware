@@ -21,8 +21,9 @@
 
 // ****** My Configs ***********
 
+// This should is implemented in keychron configs as well.
 // This fixes the problem with wake up after restart on windows
-#define SPLIT_WATCHDOG_ENABLE
+// #define SPLIT_WATCHDOG_ENABLE
 
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
@@ -46,5 +47,7 @@
 
 #define COMBO_TERM 50
 #define COMBO_TERM_PER_COMBO
+
+#define CAPS_WORD_INVERT_ON_SHIFT
 
 #define ACHORDION_STREAK
