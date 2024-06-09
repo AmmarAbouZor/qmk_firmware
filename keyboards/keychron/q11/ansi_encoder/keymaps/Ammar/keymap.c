@@ -269,7 +269,6 @@ uint16_t achordion_streak_chord_timeout(
     switch (tap_hold_keycode) {
     case HOME_D:
     case HOME_K:
-        return 80;
     case HOME_J:
     case HOME_F:
     case HOME_SPC:
