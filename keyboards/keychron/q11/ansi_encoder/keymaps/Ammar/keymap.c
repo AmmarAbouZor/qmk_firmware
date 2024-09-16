@@ -54,8 +54,8 @@ enum custom_keycodes {
 #define HOME_L LGUI_T(KC_L)
 #define HOME_SC LALT_T(KC_SCLN)
 #define HOME_SPC LT(SYMB_NAV, KC_SPC)
-#define HOME_CPS LT(NUMS, CW_TOGG) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
-// #define HOME_SHFT LSFT_T(KC_CAPS) // TODO: remove if the caps worked.
+#define HOME_CPS LT(NUMS, KC_ESC)
+#define HOME_SFT LSFT_T(KC_CAPS) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
 #define HOME_EQL LCTL_T(KC_EQL)
 #define HOME_PLUS LSFT_T(KC_PLUS)
 
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,     KC_EQL,   KC_BSPC,            KC_PGUP,
         _______,  KC_TAB,   HOME_Q,   KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,  KC_BSLS,            KC_PGDN,
         _______,  HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,     KC_G,     KC_H,   HOME_J,   HOME_K,   HOME_L,  HOME_SC,   KC_QUOT, LT(NUMS,KC_ENT), KC_HOME,
-        _______, OSM(MOD_LSFT),      KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
+        _______,  HOME_SFT,           KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
         _______, KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),              HOME_SPC,                    HOME_SPC,             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_91_ansi(
@@ -497,8 +497,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("TODO AAZ:");
         }
         break;
-    // Toggle caps word on shift Caps-Lock
-    case HOME_CPS:
+    // Toggle caps word on Shift
+    case HOME_SFT:
         if (record->tap.count) {
             if(record->event.pressed) {
                 caps_word_toggle();
