@@ -257,7 +257,16 @@ uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
 }
 
 bool achordion_eager_mod(uint8_t mod) {
-    return false;
+    switch (mod) {
+        case MOD_LSFT:
+        case MOD_RSFT:
+        case MOD_LCTL:
+        case MOD_RCTL:
+        return true;  // Eagerly apply Shift and Ctrl mods.
+
+        default:
+        return false;
+    }
 }
 
 // uint16_t achordion_streak_chord_timeout(
