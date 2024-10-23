@@ -111,6 +111,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_D:
             return TAPPING_TERM - 85;
         case HOME_K:
+        case HOME_CPS:
             return TAPPING_TERM - 105;
         case HOME_F:
             return TAPPING_TERM - 80;
@@ -147,19 +148,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
             return true;
         default:
             // Do not select the hold action when another key is tapped.
-            return false;
-    }
-}
-
-// Hold On Other Key Press for Caps-Lock and Enter
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case HOME_CPS:
-        case LT(NUMS,KC_ENT):
-            // Immediately select the hold action when another key is pressed.
-            return true;
-        default:
-            // Do not select the hold action when another key is pressed.
             return false;
     }
 }

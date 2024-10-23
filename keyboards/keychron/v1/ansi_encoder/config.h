@@ -36,7 +36,7 @@
 
 #define PERMISSIVE_HOLD_PER_KEY
 // #define PERMISSIVE_HOLD
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+// #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Retro tapping for left gui and left shift home row
 #define RETRO_TAPPING
