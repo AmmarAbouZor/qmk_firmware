@@ -134,6 +134,26 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// Permissive hold for Ctrl, Shift, Space and Q
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HOME_D:
+        case HOME_F:
+        case HOME_J:
+        case HOME_K:
+        case HOME_SPC:
+        case HOME_Q:
+        case HOME_SFT:
+        case HOME_EQL:
+        case HOME_PLUS:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
 // Hold On Other Key Press for Caps-Lock and Enter
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
