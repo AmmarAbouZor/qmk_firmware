@@ -58,14 +58,15 @@ enum custom_keycodes {
 #define HOME_SFT LSFT_T(KC_CAPS) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
 #define HOME_EQL LCTL_T(KC_EQL)
 #define HOME_PLUS LSFT_T(KC_PLUS)
+#define HOME_Z LT(FN, KC_Z)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_91_ansi(
         KC_MUTE,  KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_INS,   KC_DEL,   KC_MPLY,
         _______,  KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,     KC_EQL,   KC_BSPC,            KC_PGUP,
         _______,  KC_TAB,   HOME_Q,   KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,  KC_BSLS,            KC_PGDN,
-        _______,  HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,     KC_G,     KC_H,   HOME_J,   HOME_K,   HOME_L,  HOME_SC,   KC_QUOT, LT(NUMS,KC_ENT), KC_HOME,
-        _______,  HOME_SFT,           KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
+        _______,  HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,     KC_G,     KC_H,   HOME_J,   HOME_K,   HOME_L,  HOME_SC,   KC_QUOT,        KC_ENT,   KC_HOME,
+        _______,  HOME_SFT,         HOME_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
         _______, KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),              HOME_SPC,                    HOME_SPC,             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_91_ansi(
@@ -81,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  KC_LCBR,    KC_RCBR,  _______,            _______,
         _______,   KC_SPC, KC_EXCLAIM, KC_MINS, HOME_PLUS, HOME_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,   KC_GRV,               KC_APP,            _______,
-        _______,  _______,           TODO_AAZ,  _______,   KC_TAB,   KC_DEL,    KC_APP,  KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
+        _______,  _______,           TODO_AAZ,   KC_DEL,   KC_ESC,   KC_TAB,    KC_APP,  KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,  _______,  _______,             KC_SPC,                        KC_SPC,            _______,  _______,    _______,  _______,  _______,  _______),
 
     [NUMS] = LAYOUT_91_ansi(
@@ -122,6 +123,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM - 90;
         case HOME_A:
         case HOME_SC:
+        case HOME_Z:
             return TAPPING_TERM + 30;
         case HOME_S:
         case HOME_L:
@@ -172,10 +174,11 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Retro tapping for space bar
+// Retro tapping for space bar & caps-look as escape.
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
+        case HOME_CPS:
             return true;
         default:
             return false;
@@ -205,45 +208,6 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-
-// // *** Keys overrides ***
-// // overrides on base layer only
-// const key_override_t ctrl_zero_override = ko_make_with_layers(MOD_MASK_CTRL, KC_0, C(KC_BSPC), 1);
-// const key_override_t ctrl_nine_override = ko_make_with_layers(MOD_MASK_CTRL, KC_9, KC_BSPC, 1);
-// const key_override_t ctrl_eight_override = ko_make_with_layers(MOD_MASK_CTRL, KC_8, KC_BSPC, 1);
-//
-// // This globally defines all key overrides to be used
-// const key_override_t **key_overrides = (const key_override_t *[]){
-//     &ctrl_zero_override,
-//     &ctrl_nine_override,
-//     &ctrl_eight_override,
-//     NULL // Null terminate the array of overrides!
-// };
-
-
-// *** Combos ***
-enum combos {
-    KL_TAB,
-    CV_GERMAN,
-};
-const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
-const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
-
-combo_t key_combos[] = {
-    [KL_TAB]   = COMBO(kl_combo, MT(MOD_RSFT | MOD_LGUI, KC_TAB)),
-    [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
-};
-
-// Increase the time for Escape and Tab
-int16_t get_combo_term(uint16_t index, combo_t *combo) {
-    switch (index) {
-        case KL_TAB:
-            return 35;
-    }
-
-    return COMBO_TERM;
-}
-
 // *** achordion ***
 void matrix_scan_user(void) {
   achordion_task();
@@ -265,22 +229,6 @@ bool achordion_eager_mod(uint8_t mod) {
         return false;
     }
 }
-
-// uint16_t achordion_streak_chord_timeout(
-//     uint16_t tap_hold_keycode, uint16_t next_keycode) {
-//
-//     switch (tap_hold_keycode) {
-//     case HOME_D:
-//     case HOME_K:
-//     case HOME_J:
-//     case HOME_F:
-//     case HOME_SPC:
-//     case HOME_CPS:
-//         return 0;
-//     }
-//
-//   return 100;
-// }
 
 bool achordion_chord(uint16_t tap_hold_keycode,
                      keyrecord_t* tap_hold_record,
