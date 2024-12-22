@@ -110,23 +110,23 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-            return TAPPING_TERM - 90;
+            return TAPPING_TERM - 95;
         case HOME_D:
-            return TAPPING_TERM - 85;
+            return TAPPING_TERM - 90;
         case HOME_K:
         case HOME_CPS:
-            return TAPPING_TERM - 105;
+            return TAPPING_TERM - 110;
         case HOME_F:
-            return TAPPING_TERM - 80;
-        case HOME_J:
             return TAPPING_TERM - 85;
+        case HOME_J:
+            return TAPPING_TERM - 90;
         case HOME_A:
         case HOME_SC:
-            return TAPPING_TERM + 40;
+            return TAPPING_TERM + 30;
         case HOME_S:
         case HOME_L:
         case HOME_Q:
-            return TAPPING_TERM - 40;
+            return TAPPING_TERM - 50;
         case HOME_EQL:
         case HOME_PLUS:
             return TAPPING_TERM - 20;
@@ -223,30 +223,20 @@ bool caps_word_press_user(uint16_t keycode) {
 
 // *** Combos ***
 enum combos {
-    DF_ESC,
     KL_TAB,
-    // JK_ENTER,
     CV_GERMAN,
 };
-const uint16_t PROGMEM df_combo[] = {HOME_D, HOME_F, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {HOME_K, HOME_L, COMBO_END};
-// const uint16_t PROGMEM jk_combo[] = {HOME_J, HOME_K, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
-    [DF_ESC]   = COMBO(df_combo, MT(MOD_LSFT | MOD_LCTL,KC_ESC)),
     [KL_TAB]   = COMBO(kl_combo, MT(MOD_RSFT | MOD_LGUI, KC_TAB)),
-    // [JK_ENTER]   = COMBO(jk_combo, MT(MOD_RSFT | MOD_RCTL,KC_ENT)),
     [CV_GERMAN] = COMBO(cv_combo, OSL(FN)),
 };
 
 // Increase the time for Escape and Tab
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
     switch (index) {
-        case DF_ESC:
-            return 100;
-        // case JK_ENTER:
-        //     return 60;
         case KL_TAB:
             return 35;
     }
