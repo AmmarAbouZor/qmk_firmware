@@ -175,7 +175,6 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_SPC:
-        case HOME_CPS:
             return true;
         default:
             return false;
