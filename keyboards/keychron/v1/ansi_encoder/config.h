@@ -38,10 +38,6 @@
 // #define PERMISSIVE_HOLD
 // #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
-// Retro tapping for left gui and left shift home row
-#define RETRO_TAPPING
-#define RETRO_TAPPING_PER_KEY
-
 // This works with combination with retro tapping to suppress left GUI and left ALT
 #define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_F18
 // Neutralize left alt and left GUI (Default value)
