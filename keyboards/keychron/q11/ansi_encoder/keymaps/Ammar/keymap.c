@@ -45,21 +45,20 @@ enum custom_keycodes {
 #define KC_FLXP LGUI(KC_E)
 
 #define HOME_A LALT_T(KC_A)
-#define HOME_S LCTL_T(KC_S)
+#define HOME_S LGUI_T(KC_S)
 #define HOME_D LSFT_T(KC_D)
-#define HOME_F LT(SYMB_NAV, KC_F)
+#define HOME_F LCTL_T(KC_F)
 #define HOME_Q MT(MOD_LSFT | MOD_LALT ,KC_Q)
-#define HOME_J LT(SYMB_NAV, KC_J)
+#define HOME_J LCTL_T(KC_J)
 #define HOME_K LSFT_T(KC_K)
-#define HOME_L LCTL_T(KC_L)
+#define HOME_L LGUI_T(KC_L)
 #define HOME_SC LALT_T(KC_SCLN)
+#define HOME_SPC LT(SYMB_NAV, KC_SPC)
 #define HOME_CPS LT(NUMS, KC_ESC)
 #define HOME_SFT LSFT_T(KC_CAPS) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
-#define HOME_MINS LCTL_T(KC_MINS)
+#define HOME_EQL LCTL_T(KC_EQL)
 #define HOME_PLUS LSFT_T(KC_PLUS)
 #define HOME_Z LT(FN, KC_Z)
-#define HOME_X LGUI_T(KC_X)
-#define HOME_DOT LGUI_T(KC_DOT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_91_ansi(
@@ -67,8 +66,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,      KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,     KC_EQL,   KC_BSPC,            KC_PGUP,
         _______,  KC_TAB,   HOME_Q,   KC_W,     KC_E,     KC_R,     KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,     KC_RBRC,  KC_BSLS,            KC_PGDN,
         _______,  HOME_CPS, HOME_A, HOME_S,   HOME_D,   HOME_F,     KC_G,     KC_H,   HOME_J,   HOME_K,   HOME_L,  HOME_SC,   KC_QUOT,        KC_ENT,   KC_HOME,
-        _______,  HOME_SFT,         HOME_Z,     HOME_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,  KC_COMM,  HOME_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
-        _______, KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),              KC_SPC,                    KC_SPC,             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        _______,  HOME_SFT,         HOME_Z,     KC_X,     KC_C,     KC_V,      KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
+        _______, KC_LCTL,  KC_LWIN,  KC_LALT,  MO(FN),              HOME_SPC,                    HOME_SPC,             KC_RALT,  MO(FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [FN] = LAYOUT_91_ansi(
         KC_MUTE,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______, QK_REBOOT, KC_MPLY,
@@ -82,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  KC_MPLY,
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  KC_LCBR,    KC_RCBR,  _______,            _______,
-        _______,   KC_SPC, KC_EXCLAIM, HOME_MINS, HOME_PLUS, KC_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,   KC_GRV,               KC_APP,            _______,
+        _______,   KC_SPC, KC_EXCLAIM, KC_MINS, HOME_PLUS, HOME_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,   KC_GRV,               KC_APP,            _______,
         _______,  _______,           TODO_AAZ,   KC_DEL,   KC_ESC,   KC_TAB,    KC_APP,  KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,  _______,  _______,             KC_SPC,                        KC_SPC,            _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -111,6 +110,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case HOME_SPC:
+            return TAPPING_TERM - 110;
         case HOME_D:
             return TAPPING_TERM - 90;
         case HOME_K:
@@ -124,14 +125,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_SC:
         case HOME_Z:
             return TAPPING_TERM + 30;
-        case HOME_X:
-        case HOME_DOT:
-            return TAPPING_TERM - 40;
         case HOME_S:
         case HOME_L:
         case HOME_Q:
-            return TAPPING_TERM - 85;
-        case HOME_MINS:
+            return TAPPING_TERM - 50;
+        case HOME_EQL:
         case HOME_PLUS:
             return TAPPING_TERM - 20;
         default:
@@ -139,18 +137,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Permissive hold for Ctrl, Shift, Switch-nav and Q
+// Permissive hold for Ctrl, Shift, Space and Q
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_D:
         case HOME_F:
         case HOME_J:
         case HOME_K:
-        case HOME_L:
-        case HOME_S:
+        case HOME_SPC:
         case HOME_Q:
         case HOME_SFT:
-        case HOME_MINS:
+        case HOME_EQL:
         case HOME_PLUS:
             // Immediately select the hold action when another key is tapped.
             return true;
@@ -160,15 +157,14 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Disable quick term for Caps-lock, Nav-switcher , Control and Shift
+// Disable quick term for backspace
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HOME_CPS:
+        case HOME_SPC:
         case HOME_D:
         case HOME_F:
-        case HOME_S:
-        case HOME_L:
-        case HOME_MINS:
+        case HOME_EQL:
         case HOME_PLUS:
         case HOME_K:
         case HOME_J:
@@ -177,6 +173,17 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
             return QUICK_TAP_TERM;
     }
 }
+
+// Retro tapping for space bar & caps-look as escape.
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HOME_SPC:
+            return true;
+        default:
+            return false;
+    }
+}
+
 
 // *** Caps Words ***
 bool caps_word_press_user(uint16_t keycode) {
@@ -232,7 +239,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_S:
             case HOME_F:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_W:
             case KC_E:
             case KC_R:
@@ -246,7 +253,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_S:
             case HOME_D:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_W:
             case KC_E:
             case KC_R:
@@ -259,7 +266,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_A:
             case HOME_D:
             case HOME_F:
-            case KC_SPC:
             case KC_W:
             case KC_E:
             case KC_R:
@@ -274,7 +280,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_S:
             case HOME_D:
             case HOME_F:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_W:
             case KC_E:
             case KC_R:
@@ -289,7 +295,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_L:
             case HOME_SC:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_U:
             case KC_I:
             case KC_O:
@@ -304,7 +310,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_K:
             case HOME_L:
             case HOME_SC:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_U:
             case KC_I:
             case KC_O:
@@ -317,7 +323,6 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_SC:
-            case KC_SPC:
             case KC_U:
             case KC_I:
             case KC_O:
@@ -332,7 +337,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case HOME_J:
             case HOME_K:
             case HOME_L:
-            case KC_SPC:
+            case HOME_SPC:
             case KC_U:
             case KC_I:
             case KC_O:
@@ -342,7 +347,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                 return false;
         }
         break;
-    case HOME_MINS:
+    case HOME_EQL:
         switch (other_keycode) {
             case KC_TILDE:
             case KC_AT:
@@ -350,7 +355,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_DOLLAR:
             case KC_PERCENT:
             case KC_EXCLAIM:
-            case KC_EQL:
+            case KC_MINS:
             case KC_PLUS:
             case KC_UNDS:
             case KC_SPC:
