@@ -45,19 +45,19 @@ enum custom_keycodes {
 #define KC_FLXP LGUI(KC_E)
 
 #define HOME_A LGUI_T(KC_A)
-#define HOME_S LCTL_T(KC_S)
+#define HOME_S LT(SYMB_NAV, KC_S)
 #define HOME_D LSFT_T(KC_D)
-#define HOME_F LT(SYMB_NAV, KC_F)
+#define HOME_F LCTL_T(KC_F)
 #define HOME_Q MT(MOD_LSFT | MOD_LALT ,KC_Q)
-#define HOME_J LT(SYMB_NAV, KC_J)
+#define HOME_J LCTL_T(KC_J)
 #define HOME_K LSFT_T(KC_K)
-#define HOME_L LCTL_T(KC_L)
+#define HOME_L LT(SYMB_NAV, KC_L)
 #define HOME_SC LGUI_T(KC_SCLN)
 #define HOME_CPS LT(NUMS, KC_ESC)
 #define HOME_SFT LSFT_T(KC_CAPS) // The key hier doesn't matter. I'm toggeling caps words in process_record_user() manually.
-#define HOME_MINS LCTL_T(KC_MINS)
+#define HOME_EQL LCTL_T(KC_EQL)
 #define HOME_PLUS LSFT_T(KC_PLUS)
-#define HOME_Z LT(FN, KC_Z)
+#define HOME_Z LALT_T(KC_Z)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_91_ansi(
@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,  _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,   RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  KC_MPLY,
         _______,  _______,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,     KC_F12,  _______,            _______,
         _______,  CW_TOGG,  KC_TILDE,   KC_AT,  KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRC,  KC_AMPR, KC_ASTR,  KC_LPRN,  KC_RPRN,  KC_LCBR,    KC_RCBR,  _______,            _______,
-        _______,   KC_SPC, KC_EXCLAIM, HOME_MINS, HOME_PLUS, KC_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,   KC_GRV,               KC_APP,            _______,
+        _______,   KC_SPC, KC_EXCLAIM, KC_MINS, HOME_PLUS, HOME_EQL, KC_UNDS,   KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,  KC_PIPE,   KC_GRV,               KC_APP,            _______,
         _______,  _______,           TODO_AAZ,   KC_DEL,   KC_ESC,   KC_TAB,    KC_APP,  KC_BSPC,   KC_ENT,    KC_LT,    KC_GT,  KC_BSLS,              KC_CAPS,  _______,
         _______,  _______,  _______,  _______,  _______,             KC_SPC,                        KC_SPC,            _______,  _______,    _______,  _______,  _______,  _______),
 
@@ -126,7 +126,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM + 30;
         case HOME_Q:
             return TAPPING_TERM - 50;
-        case HOME_MINS:
+        case HOME_EQL:
         case HOME_PLUS:
             return TAPPING_TERM - 20;
         default:
@@ -143,7 +143,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         case HOME_K:
         case HOME_Q:
         case HOME_SFT:
-        case HOME_MINS:
+        case HOME_EQL:
         case HOME_PLUS:
             // Immediately select the hold action when another key is tapped.
             return true;
@@ -160,7 +160,7 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_S:
         case HOME_D:
         case HOME_F:
-        case HOME_MINS:
+        case HOME_EQL:
         case HOME_PLUS:
         case HOME_K:
         case HOME_J:
@@ -280,6 +280,22 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                 return false;
         }
         break;
+    case HOME_Z:
+        switch (other_keycode) {
+            case HOME_A:
+            case HOME_S:
+            case HOME_D:
+            case HOME_F:
+            case KC_SPC:
+            case KC_W:
+            case KC_E:
+            case KC_R:
+            case KC_T:
+            case KC_C:
+            case KC_V:
+                return false;
+        }
+        break;
     case HOME_K:
         switch (other_keycode) {
             case HOME_J:
@@ -340,7 +356,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                 return false;
         }
         break;
-    case HOME_MINS:
+    case HOME_EQL:
         switch (other_keycode) {
             case KC_TILDE:
             case KC_AT:
@@ -348,7 +364,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
             case KC_DOLLAR:
             case KC_PERCENT:
             case KC_EXCLAIM:
-            case KC_EQL:
+            case KC_MINS:
             case KC_PLUS:
             case KC_UNDS:
             case KC_SPC:
